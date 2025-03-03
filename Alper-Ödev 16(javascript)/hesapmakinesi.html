@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="b2e014c626167b8e45bb6f16b363a0bb.png">
+    <title>hesapmakinesi</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2018400078654574"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <h1 style="font-size: 30px;text-align: center;"><b>Hesap Makinesi 
+        </h1><hr width="100%">
+        <br>
+        <br>
+        <br>
+    <div class="calculator">
+        </b>
+        <br>
+        <br>
+    </div>
+    <div class="box">
+        <input style="padding-left: 143px;" type="text" id="display" disabled>
+
+
+        <div>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="clearDisplay()">C</button>
+
+        </div>
+        <div>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('Math.sqrt')">√</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('Math.sin(')">sin</button>
+            <button onclick="appendToDisplay('Math.cos(')">cos</button>
+            <button onclick="appendToDisplay('Math.tan(')">tan</button>
+            <button onclick="appendToDisplay('1/Math.tan(')">cot</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('Math.factorial(')">n!</button>
+            <button onclick="appendToDisplay('Math.log(')">log</button>
+            <button onclick="appendToDisplay('**2')">x²</button>
+            <button onclick="appendToDisplay('**3')">x³</button>
+            <br>
+        </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <script>
+const themeToggleBtn = document.getElementById('theme-toggle');
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+            });
+            document.getElementById("navToggle").addEventListener("click", function() {
+    const nav = document.getElementById("nav");
+    nav.style.display = "block";
+});
+
+document.getElementById("navClose").addEventListener("click", function() {
+    const nav = document.getElementById("nav");
+    nav.style.display = "none";
+});
+
+Math.factorial = function (n) {
+                if (n < 0) return undefined;
+                if (n === 0) return 1; 
+                return n * Math.factorial(n - 1);
+            };
+
+            function appendToDisplay(value) {
+                document.getElementById('display').value += value;
+            }
+
+            function clearDisplay() {
+                document.getElementById('display').value = '';
+            }
+
+            function calculateResult() {
+                const display = document.getElementById('display');
+                try {
+                    display.value = eval(display.value.replace(/\*\*/g, '^'));
+                } catch (e) {
+                    display.value = 'Hata';
+                }
+            }
+    </script>
+      <style>
+        .dark-theme button:hover  {
+            background-color: #575757;
+            color: #ccc;
+            transition: background-color 0.4s ease-in-out;
+        } 
+        .dark-theme .theme-toggle  {
+            background-color: #494949;
+            color: rgb(0, 0, 0);
+            transition: background-color 0.4s ease-in-out;
+        } 
+        .dark-theme button {
+            background-color: #494949;
+            color: white;
+            transition: background-color 0.4s ease-in-out;
+        } 
+        .dark-theme nav {
+            background-color: #494949;
+            color: white;
+            transition: background-color 0.4s ease-in-out;
+        } 
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        ul li {
+            display: inline;
+        }
+       
+        ul li a {
+            color: black;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+        } 
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(255, 255, 255); 
+    color: rgb(0, 0, 0); 
+    padding: 20px;
+    transition: 0.3s all;
+}
+
+h1, h2 {
+    margin: 20px 0;
+    font-family: 'Georgia', serif;
+}
+
+.current-time {
+    font-size: 72px; 
+    margin-bottom: 20px;
+}
+
+input[type="time"], 
+input[type="text"],
+select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid white; 
+    margin: 10px 0; 
+    width: 300px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 30%;
+    border: none;
+    background-color: white; 
+    color: black;
+    cursor: pointer;
+    margin: 10px 0; 
+    width: 30px;
+}
+
+button:hover {
+    background-color: #ccc;
+}
+nav {
+    background-color: #bfbfbf;
+    width: 100%;
+    margin: -20px;
+    height: 100px;
+    opacity: 0.9;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+
+#display {
+    width: 350px;
+    height: 50px;
+    font-size: 24px;
+    text-align: right;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+.button-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+button {
+    width: 90px;
+    height: 50px;
+    font-size: 16px;
+    margin-right: 5px; 
+    cursor: pointer;
+    background-color: #bfbfbf;
+    text-align: center;
+}
+.box{
+    background-color:#cac9c9;
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+}
+.dark-theme .box{
+    background-color: #333;
+    transition: 0.3s all;
+}
+.dark-theme {
+    background-color: #000000;
+    color: #f4f4f4;
+    transition: all 0.4s ease-in-out;
+  }
+  .dark-theme a {
+    color: rgb(255, 255, 255);
+    transition: all 0.4s ease-in-out;
+  }
+  .clock {
+    display: inline-block;
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    width: 150px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.clock:hover {
+    background-color: #ffffff;
+}
+.large-clock {
+    font-size: 250px;
+    margin-top: 20px;
+    display: block;
+}
+.date {
+    font-size: 50px;
+    margin-top: 10px;
+}
+.cities-container {
+    border: 2px solid #333;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    display: inline-block;
+    text-align: center;
+}
+.dark-theme input{
+    background-color: #333;
+    color: white;
+    transition: 0.3s all;
+} 
+.box2{
+    display: flex;
+    background: #bfbfbf;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(60, 60, 60, 60);
+   
+}
+.box3{
+    display: flex;
+    background: #bfbfbf;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(60, 60, 60, 60);
+}
+#nav {
+            background-color: #bfbfbf;
+            transition: all 0.3s ease-in-out;
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: none;
+            padding: 15px;
+        }
+
+        .dark-theme #nav {
+            background-color: #494949;
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        #nav button {
+            color: black;
+            transition: all 0.3s ease-in-out;
+        }
+        .dark-theme #nav button {
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        #nav-hover {
+            transition: all 0.4s ease-in-out;
+        }
+
+        #nav ul {
+            transition: all 0.3s ease-in-out;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #nav ul li {
+            transition: all 0.3s ease-in-out;
+            margin: 10px 0;
+        }
+
+        #nav ul li a {
+            transition: all 0.3s ease-in-out;
+            color: black;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .dark-theme #nav ul li a {
+            transition: all 0.3s ease-in-out;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #nav ul li a:hover {
+            transition: all 0.3s ease-in-out;
+            background-color: #9d9d9d;
+        }
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+#content section {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 200px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+    </style>
+</body>
+</html>

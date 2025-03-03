@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastgele Sayı Üretici</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #number {
+            font-size: 2rem;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button onclick="generateRandomNumber()">Rastgele Sayı Üret</button>
+        <div id="number"></div>
+    </div>
+
+    <script>
+        function generateRandomNumber() {
+            
+            const randomNumber = Math.floor(Math.random() * 101);
+           
+            document.getElementById('number').textContent = randomNumber;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metin İstatistikleri</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
+    .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+    textarea { width: 100%; height: 100px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 10px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Metin İstatistikleri</h1>
+  <p>Metninizi aşağıya yazın ve "Analiz Et" butonuna tıklayın.</p>
+  <textarea id="inputText" placeholder="Metninizi buraya yazın..."></textarea>
+  <button onclick="analyzeText()">Analiz Et</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function analyzeText() {
+      const text = document.getElementById("inputText").value;
+      let letterCount = 0, digitCount = 0, otherCount = 0;
+
+     
+      for (const char of text) {
+        if (/[a-zA-Z]/.test(char)) letterCount++;
+        else if (/[0-9]/.test(char)) digitCount++;
+        else otherCount++;
+      }
+
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = `
+        <p><strong>Harf Sayısı:</strong> ${letterCount}</p>
+        <p><strong>Rakam Sayısı:</strong> ${digitCount}</p>
+        <p><strong>Diğer Karakter Sayısı:</strong> ${otherCount}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

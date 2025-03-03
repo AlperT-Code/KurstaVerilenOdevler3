@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takvim Uygulaması</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #555;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="number"], input[type="text"], button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            width: 14.28%;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #444;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        td {
+            background-color: #444;
+        }
+
+        td.empty {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Takvim Uygulaması</h1>
+
+        <label for="year">Yıl:</label>
+        <input type="number" id="year" placeholder="Yıl girin" />
+
+        <label for="month">Ay:</label>
+        <input type="number" id="month" placeholder="Ay numarasını girin (1-12)" />
+
+        <button onclick="generateCalendar()">Takvimi Göster</button>
+
+        <div id="calendar"></div>
+    </div>
+
+    <script>
+        function generateCalendar() {
+            const month = parseInt(document.getElementById('month').value) - 1; // Ay 0'dan başlar (0 = Ocak)
+            const year = parseInt(document.getElementById('year').value);
+
+            if (isNaN(month) || isNaN(year) || month < 0 || month > 11) {
+                alert("Lütfen geçerli bir yıl ve ay girin.");
+                return;
+            }
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+
+            const calendarTable = document.createElement('table');
+            const headerRow = document.createElement('tr');
+
+            
+            const weekdays = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+            for (let i = 0; i < weekdays.length; i++) {
+                const th = document.createElement('th');
+                th.textContent = weekdays[i];
+                headerRow.appendChild(th);
+            }
+
+            calendarTable.appendChild(headerRow);
+
+          
+            const firstDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; // Pazartesi 0, Pazar 6
+
+            
+            let day = 1;
+            let row = document.createElement('tr');
+
+          
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const td = document.createElement('td');
+                td.classList.add('empty');
+                row.appendChild(td);
+            }
+
+            
+            for (let i = firstDayOfWeek; i < 7; i++) {
+                const td = document.createElement('td');
+                td.textContent = day;
+                row.appendChild(td);
+                day++;
+            }
+
+            calendarTable.appendChild(row);
+
+        
+            while (day <= daysInMonth) {
+                row = document.createElement('tr');
+                for (let i = 0; i < 7 && day <= daysInMonth; i++) {
+                    const td = document.createElement('td');
+                    td.textContent = day;
+                    row.appendChild(td);
+                    day++;
+                }
+                calendarTable.appendChild(row);
+            }
+
+            const calendarDiv = document.getElementById('calendar');
+            calendarDiv.innerHTML = ''; 
+
+            
+            calendarDiv.appendChild(calendarTable);
+        }
+    </script>
+
+</body>
+</html>

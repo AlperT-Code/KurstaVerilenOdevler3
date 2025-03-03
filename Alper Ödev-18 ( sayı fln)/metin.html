@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metin Gizleme ve Gösterme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #text {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            width: 80%;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div> 
+        <button onclick="toggleText()">Metni Gizle/Göster</button>
+        <div id="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor, nisi id facilisis feugiat, felis nisi tincidunt nulla, ac ullamcorper felis purus id odio. Proin euismod libero et quam elementum, at tristique ante dictum. Nulla varius elit id leo tempus, in condimentum lorem dapibus. Sed dictum libero id lectus elementum, eu vestibulum lorem pretium. Fusce consectetur, felis non tempor vulputate, libero velit aliquet purus, eget aliquet velit nulla a felis. Vivamus auctor velit at turpis gravida, non scelerisque ante volutpat. Donec et suscipit mi. Ut eget magna nec ipsum condimentum cursus ac eget felis.
+        </div>
+       
+    </div>
+
+    <script>
+        function toggleText() {
+            const textElement = document.getElementById('text');
+     
+            if (textElement.style.display === 'none') {
+                textElement.style.display = 'block';
+            } else {
+                textElement.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

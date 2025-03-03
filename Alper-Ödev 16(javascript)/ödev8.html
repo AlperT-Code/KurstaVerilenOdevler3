@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Ayrıntıları</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; text-align: center; }
+    textarea { width: 100%; height: 50px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>URL Ayrıntıları Görüntüleyici</h1>
+  <p>Bir URL girin ve ayrıntılarını görmek için "Ayrıntıları Göster" butonuna tıklayın:</p>
+  <textarea id="inputUrl" placeholder="Örnek: https://itstep.org/ua/about"></textarea>
+  <button onclick="showUrlDetails()">Ayrıntıları Göster</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function showUrlDetails() {
+      const url = document.getElementById("inputUrl").value.trim();
+      
+      try {
+        const urlObj = new URL(url); 
+        const details = `
+          <p><strong>Protokol:</strong> ${urlObj.protocol}</p>
+          <p><strong>Host (Domain):</strong> ${urlObj.hostname}</p>
+          <p><strong>Port:</strong> ${urlObj.port || 'Varsayılan (80/443)'}</p>
+          <p><strong>Yol (Path):</strong> ${urlObj.pathname}</p>
+          <p><strong>Sorgu Parametreleri:</strong> ${urlObj.search || 'Yok'}</p>
+          <p><strong>Hash (Fragment):</strong> ${urlObj.hash || 'Yok'}</p>
+        `;
+        document.getElementById("output").innerHTML = details;
+      } catch (error) {
+        document.getElementById("output").innerHTML = "<p>Geçerli bir URL girin.</p>";
+      }
+    }
+  </script>
+</body>
+</html>

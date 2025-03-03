@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelime Grubunu Kısaltmaya Dönüştür</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; text-align: center; }
+    textarea { width: 100%; height: 100px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>Kelime Grubunu Kısaltmaya Dönüştür</h1>
+  <p>Bir kelime grubu girin ve kısaltmasını görmek için "Dönüştür" butonuna tıklayın:</p>
+  <textarea id="inputText" placeholder="Örnek: Katılım ve Büyüme Stratejileri"></textarea>
+  <button onclick="convertToAbbreviation()">Dönüştür</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function convertToAbbreviation() {
+      const text = document.getElementById("inputText").value;
+      if (text.trim() === "") {
+        document.getElementById("output").innerHTML = "<p>Lütfen geçerli bir kelime grubu girin.</p>";
+        return;
+      }
+
+      const words = text.split(/\s+/);
+      const abbreviation = words.map(word => word.charAt(0).toUpperCase()).join('');
+
+      document.getElementById("output").innerHTML = `
+        <p><strong>Kısaltma:</strong> ${abbreviation}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

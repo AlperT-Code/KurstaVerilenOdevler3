@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, white, blue);
+            color: #333;
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background-color: #f0f8ff;
+        }
+        nav {
+            background-color: #0073e6;
+            padding: 15px 25px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h1 {
+            margin: 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        .search-container input, .search-container button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 20px;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+        #weatherInfo {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        #weatherInfo div {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 300px;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        .status-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #0073e6;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+        footer a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #0073e6;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: white;
+        }
+
+        .rainy, .snowy {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
+
+        .rain {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: rain 2s linear infinite;
+        }
+
+        .snow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            animation: snow 5s linear infinite;
+        }
+
+        @keyframes rain {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes snow {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .black-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999999999999;
+            pointer-events: none;
+            animation: fadeOutBlackScreen 6s forwards;
+        }
+
+        .big-image {
+            width: 470px;
+            height: 470px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeOutImage 5s forwards;
+        }
+
+        @keyframes fadeOutImage {
+            0% { opacity: 0; transform: scale(1); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.9); }
+        }
+
+        @keyframes fadeOutBlackScreen {
+            0% { opacity: 1; transform: scale(1); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
+        @media (max-width: 796px) {
+            .big-image {
+                width: 300px;
+                height: 280px;
+            }
+
+            .spinner {
+                width: 40px;
+                height: 40px;
+                border-width: 6px;
+                margin: 1px;
+                margin-left: 123px;
+            }
+
+            .loading-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="black-screen">
+        <span class="loading-text">
+            <img src="pngtree-weather-icon-png-image_6535514-Photoroom.png" alt="Logo" class="big-image">
+            <div class="spinner"></div>
+        </span>
+    </div>
+
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+                document.querySelector('.big-image').style.animation = 'fadeOutImage 2s forwards';
+            }, 0);
+
+            setTimeout(() => {
+                document.querySelector('.black-screen').style.animation = 'fadeOutBlackScreen 3s forwards';
+                document.querySelector('.black-screen').style.opacity = '0';
+                document.querySelector('.black-screen').style.pointerEvents = 'none';
+            }, 2000);
+
+            setTimeout(() => {
+                document.querySelector('.black-screen').style.display = 'none';
+                document.querySelector('.big-image').style.display = 'none';
+            }, 4000);
+        };
+    </script>
+    <nav>
+        <h1>&nbspHavanıYediğim.com<img src="pngtree-weather-icon-png-image_6535514-Photoroom.png" alt="Logo"><br><p style="font-size: 10px;">Biz Söyleyelim Siz Önlem Alın</p><br></h1>
+        <div class="search-container">
+            <input type="text" id="cityInput" placeholder="Şehir adı girin">
+            <button onclick="showDailyWeather()">Günlük Hava Durumu</button>
+            <button onclick="showWeeklyWeather()">Haftalık Hava Durumu</button>
+        </div>
+    </nav>
+
+    <h1>Hava Durumu</h1>
+    <!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info Box</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .info-box {
+      position: fixed;
+    
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #0073e6;
+      padding: 15px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      width: 60%;
+      height: 200px;
+      max-width: 600px;
+      z-index: 1000;
+      display: block;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .close-btn:hover {
+      color: red;
+    }
+
+    p {
+      margin: 0;
+      padding-right: 30px; 
+    }
+  </style>
+</head>
+<body>
+
+  <div id="info-box" class="info-box">
+    <button id="close-btn" class="close-btn">X</button>
+    <h1 style="font-size: 15px;text-align: left;color: white;">&nbspHavanıYediğim.com<img style="width: 30px;height: 30px;" src="pngtree-weather-icon-png-image_6535514-Photoroom.png" alt="Logo"><br></h1>
+    <p style="color:white;text-align: left;">Başlamak İçin Arama Çubuğunda Hava Durumunu Öğrenmek istediğiniz şehrin ismini giriniz ve sonra günlük ya da haftalık hava durumunu öğrenmek için seçim yapınız.</p>
+  </div>
+
+  <script>
+    document.getElementById('close-btn').addEventListener('click', function() {
+      document.getElementById('info-box').style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
+
+    <div id="weatherInfo"></div>
+    
+    <footer>
+        <a href="#">Gizlilik</a>
+        <a href="#">Kullanım Şartları</a>
+        <a href="#">Hakkımızda</a>
+    </footer>
+
+    <script>
+        const apiKey = "1BB6pJcKcMIOKDuhWzpRsE:4UmBFvm96vgyO3TxHWLTwi";
+
+    
+const cities = {
+
+    "istanbul": "istanbul",
+    "bursa": "bursa",
+    "ankara": "ankara",
+    "izmir": "izmir",
+    "antalya": "antalya",
+    "adana": "adana",
+    "konya": "konya",
+    "gaziantep": "gaziantep",
+    "kayseri": "kayseri",
+    "mersin": "mersin",
+    "samsun": "samsun",
+    "eskisehir": "eskisehir",
+    "denizli": "denizli",
+    "trabzon": "trabzon",
+    "balikesir": "balikesir",
+    "malatya": "malatya",
+    "kayseri": "kayseri",
+    "diyarbakir": "diyarbakir",
+    
+
+    
+    "new york": "new york",
+    "los angeles": "los angeles",
+    "london": "london",
+    "paris": "paris",
+    "tokyo": "tokyo",
+    "berlin": "berlin",
+    "mumbai": "mumbai",
+    "sydney": "sydney",
+    "cape town": "cape town",
+    "rome": "rome",
+    "amsterdam": "amsterdam",
+    "madrid": "madrid",
+    "toronto": "toronto",
+    "vancouver": "vancouver",
+    "seoul": "seoul",
+    "hong kong": "hong kong",
+    "singapore": "singapore",
+    
+};
+
+function getRandomCity() {
+    const cityNames = Object.keys(cities);
+    const randomIndex = Math.floor(Math.random() * cityNames.length);
+    return cityNames[randomIndex];
+}
+
+function showWeeklyWeather() {
+    const cityInput = document.getElementById("cityInput").value.trim().toLowerCase();
+    const city = cities[cityInput] || getRandomCity(); // Eğer şehir bulunamazsa rastgele bir şehir seç
+    getWeather(city, "weekly");
+}
+
+function showDailyWeather() {
+    const cityInput = document.getElementById("cityInput").value.trim().toLowerCase();
+    const city = cities[cityInput] || getRandomCity(); // Eğer şehir bulunamazsa rastgele bir şehir seç
+    getWeather(city, "daily");
+}
+
+        function getWeather(city, type) {
+            const xhr = new XMLHttpRequest();
+            const url = `https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=${city}`;
+            xhr.open("GET", url);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("authorization", `apikey ${apiKey}`);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (type === "daily") {
+                        displayWeather(response.result[0]);
+                    } else {
+                        displayWeather(response.result);
+                    }
+                } else {
+                    document.getElementById("weatherInfo").innerHTML = "Hava durumu alınamadı. Lütfen geçerli bir şehir adı girin.";
+                }
+            };
+            xhr.send();
+        }
+
+        function displayWeather(data) {
+            const weatherDiv = document.getElementById("weatherInfo");
+            weatherDiv.innerHTML = "";
+            if (Array.isArray(data)) {
+                data.forEach(displayDayWeather);
+            } else {
+                displayDayWeather(data);
+            }
+        }
+
+        function displayDayWeather(day) {
+            const statusMessage = getStatusMessage(day.status);
+            const weatherDiv = document.getElementById("weatherInfo");
+            weatherDiv.innerHTML += `
+                <div>
+                    <h3>${day.date} - ${day.day}</h3>
+                    <img src="${day.icon}" alt="Hava durumu ikonu">
+                    <p>Durum: ${day.description}</p>
+                    <p>Sıcaklık: ${day.degree}°C</p>
+                    <p>Nem: ${day.humidity}%</p>
+                    <p class="status-text">${statusMessage}</p>
+                </div>
+            `;
+            
+          
+            if (day.status.toLowerCase() === "rainy") {
+                createRainEffect();
+            } else if (day.status.toLowerCase() === "snowy") {
+                createSnowEffect();
+            }
+        }
+
+        function getStatusMessage(status) {
+            switch (status.toLowerCase()) {
+                case "rainy": return "Yağmurlu! Şemsiye almayı unutmayın.";
+                case "cloudy": return "Bulutlu bir hava sizi bekliyor.";
+                case "clear": return "Güneşli bir gün, dışarı çıkın!";
+                case "snowy": return "Kar yağıyor! Soğuk havaya dikkat.";
+                default: return "Nolur Nolmaz Hazırlıklı Gelin";
+            }
+        }
+
+        function createRainEffect() {
+            const rainDiv = document.createElement('div');
+            rainDiv.classList.add('rainy');
+            document.body.appendChild(rainDiv);
+
+            const numberOfRaindrops = 100;
+            for (let i = 0; i < numberOfRaindrops; i++) {
+                let raindrop = document.createElement('div');
+                raindrop.classList.add('rain');
+                rainDiv.appendChild(raindrop);
+            }
+        }
+
+        function createSnowEffect() {
+            const snowDiv = document.createElement('div');
+            snowDiv.classList.add('snowy');
+            document.body.appendChild(snowDiv);
+
+            const numberOfSnowflakes = 50;
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                let snowflake = document.createElement('div');
+                snowflake.classList.add('snow');
+                snowDiv.appendChild(snowflake);
+            }
+        }
+    </script>
+</body>
+</html>

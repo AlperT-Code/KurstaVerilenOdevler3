@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haber Listesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .news-item {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .news-item h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .news-item p {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        #load-more-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #load-more-btn:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Haber's</h1>
+
+    <div id="news-container">
+       
+    </div>
+
+    <button id="load-more-btn">Daha Fazla Haber Yükle</button>
+
+    <script>
+       
+       const newsData = [
+    { title: "Yeni Yıl İndirimleri Başladı", description: "Yılın en büyük indirimleri tüm mağazalarda başladı. Alışveriş yapmak için harika bir zaman!" },
+    { title: "Kış Tatili Planları", description: "Kış tatilinizi planlamak için öneriler: En iyi kayak merkezleri, sıcak içecekler ve kar manzaraları." },
+    { title: "Sağlıklı Yaşam İçin İpuçları", description: "Kış aylarında sağlıklı kalmak için önerilen beslenme alışkanlıkları ve egzersiz rutinleri." },
+    { title: "Haftasonu Kaçamağı", description: "Yakınlardaki gizli cennetler! Şehirden uzaklaşmak ve doğanın tadını çıkarmak için ideal yerler." },
+    { title: "Çalışma Verimliliği Arttırma Yolları", description: "Evden çalışırken daha verimli olmanın yolları. Yeni çalışma düzeninize adapte olmanın püf noktaları." },
+    { title: "Baharın Modası", description: "2024 bahar sezonunun modası. Hangi renkler ve stiller ön planda olacak?" },
+    { title: "Teknolojideki Yeni Gelişmeler", description: "Yapay zeka, yeni akıllı telefonlar ve teknoloji dünyasında neler oluyor? 2024'teki en büyük yenilikler." },
+    { title: "Evde Kolay Yemek Tarifleri", description: "Yoğun bir günde pratik ve lezzetli yemek tarifleri. 15 dakikada hazırlayabileceğiniz pratik yemekler." },
+    { title: "Evinizdeki Dekorasyon Fikirleri", description: "Evde küçük değişikliklerle büyük farklar yaratın. Dekorasyon için ilham alabileceğiniz 10 fikir." },
+    { title: "Yaz Tatili Planları", description: "Yaz tatilinizi şimdiden planlamaya başlayın. En güzel plajlar, tatil köyleri ve gezilecek yerler." }
+];
+
+
+        let currentIndex = 0;
+        const newsContainer = document.getElementById('news-container');
+        const loadMoreButton = document.getElementById('load-more-btn');
+
+        function loadNews() {
+  
+            for (let i = 0; i < 3 && currentIndex < newsData.length; i++) {
+                const news = newsData[currentIndex];
+                const newsItem = document.createElement('div');
+                newsItem.classList.add('news-item');
+                newsItem.innerHTML = `<h3>${news.title}</h3><p>${news.description}</p>`;
+                newsContainer.appendChild(newsItem);
+                currentIndex++;
+            }
+
+         
+            if (currentIndex >= newsData.length) {
+                loadMoreButton.disabled = true;
+                loadMoreButton.textContent = "Tüm haberler yüklendi";
+            }
+        }
+
+       
+        window.onload = loadNews;
+
+    
+        loadMoreButton.addEventListener('click', loadNews);
+
+      
+        window.addEventListener('scroll', function() {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                loadNews();
+            }
+        });
+    </script>
+
+</body>
+</html>

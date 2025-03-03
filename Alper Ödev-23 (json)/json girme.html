@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JSON Formatter</title>
+    </head>
+    <body>
+        <div style="width: 1500px; height: 700px; background-color: rgb(243, 235, 220); font-size: 20px; font-weight: bold;" class="container">
+            <span style="padding: 0; margin: 0; text-align: start; float: left;">Enter JSON data:</span>
+            <span style="padding: 0; margin: 0; text-align: start; float: right;">Formatted JSON data:</span>
+            <textarea id="kod" style="width: 500px; max-width: 500px; max-height: 625px; min-height: 625px; background-color: white; border: 2px solid black; min-width: 500px; height: 625px; float: left; margin: 50px; text-decoration: double; text-align: left; padding: 10px; font-size: 16px;"></textarea>
+            <button id="formatButton" style="height: 620px; font-size: 30px; float: left; margin-top: 50px;">&#62;</button>
+            <div id="output" style="width: 500px; height: 600px; float: left; margin: 50px; background-color: white; border: 2px solid black; padding: 10px; overflow-y: auto; font-family: monospace; white-space: pre-wrap;"></div>
+        </div>
+    
+        <script>
+            document.getElementById('formatButton').onclick = function(){
+                const input = document.getElementById('kod').value;
+                const outputDiv = document.getElementById('output');
+    
+                try {
+                    const jsonData = JSON.parse(input);
+                    const formattedJSON = JSON.stringify(jsonData, null, 4); 
+                    outputDiv.style.color = "black"; 
+                    outputDiv.textContent = formattedJSON; 
+                } catch (error) {
+                    outputDiv.style.color = "red";
+                    outputDiv.textContent = "Error: Invalid JSON data!";
+                }
+            };
+            // Ben yaptım //
+        </script>
+    </body>
+    </html>
+    
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fare Koordinatları ve Tıklama</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            width: 100%;
+            height: 100%;
+            background-color: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+        #coordinates {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #clickInfo {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            font-size: 1.2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="coordinates">Koordinatlar: X: 0, Y: 0</div>
+        <div id="clickInfo">Tıklama: Henüz yapılmadı</div>
+    </div>
+
+    <script>
+        const coordinatesElement = document.getElementById('coordinates');
+        const clickInfoElement = document.getElementById('clickInfo');
+        const container = document.getElementById('container');
+
+      
+        container.addEventListener('mousemove', function(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            coordinatesElement.textContent = `Koordinatlar: X: ${x}, Y: ${y}`;
+        });
+
+      
+        container.addEventListener('mousedown', function(event) {
+            let button;
+            if (event.button === 0) {
+                button = "Sol Düğme";
+            } else if (event.button === 2) {
+                button = "Sağ Düğme";
+            }
+            clickInfoElement.textContent = `Tıklama: ${button}`;
+        });
+
+        container.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>

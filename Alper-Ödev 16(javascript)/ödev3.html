@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metin Dönüştürme</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; text-align: center; }
+    textarea { width: 100%; height: 100px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>Metin Dönüştürme</h1>
+  <p>Dizenizi girin ve "Dönüştür" butonuna tıklayın:</p>
+  <textarea id="inputText" placeholder="Dizeyi buraya yazın..."></textarea>
+  <button onclick="transformText()">Dönüştür</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function transformText() {
+      const text = document.getElementById("inputText").value;
+      let transformedText = '';
+
+      for (const char of text) {
+        if (/[A-Z]/.test(char)) {
+          transformedText += char.toLowerCase();
+        } else if (/[a-z]/.test(char)) {
+          transformedText += char.toUpperCase();
+        } else if (/[0-9]/.test(char)) {
+          transformedText += '_';
+        } else {
+          transformedText += char;
+        }
+      }
+
+      document.getElementById("output").innerHTML = `
+        <p><strong>Dönüştürülmüş Metin:</strong></p>
+        <p>${transformedText}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

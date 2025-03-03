@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava</title>
+    
+</head>
+<body>
+    <div id="current-weather">
+        <h1>Hava Durumu</h1>
+        <p id="city"></p>
+        <p id="country"></p>
+        <p id="temperature"></p>
+        <img id="weather-icon" alt="Weather Icon">
+        <p id="weather-description"></p>
+        <p id="wind-speed"></p>
+        <p id="precipitation"></p>
+        <p id="pressure"></p>
+    </div>
+    <script>
+        const city = 'Bursa';
+        const country = 'TR';
+        const apiKey = 'ce2eca2051b7b8a1bcceac3f25d669e6'; 
+        const url = `https://api.weatherstack.com/current?access_key=${apiKey}&query=${city},${country}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('city').textContent = `${data.location.name}, ${data.location.country}`;
+                document.getElementById('country').textContent = data.location.country;
+                document.getElementById('temperature').textContent = `${data.current.temperature} °C`;
+                document.getElementById('weather-description').textContent = data.current.weather_descriptions[0];
+                document.getElementById('weather-icon').src = data.current.weather_icons[0];
+                document.getElementById('wind-speed').textContent = `Rüzgar Hızı: ${data.current.wind_speed} km/s`;
+                document.getElementById('precipitation').textContent = `Yağış: ${data.current.precip} mm`;
+                document.getElementById('pressure').textContent = `Basınç: ${data.current.pressure} mb`;
+            })
+            .catch(error => console.error('Hata:', error));
+
+        const forecastUrl = `https://api.weatherstack.com/forecast?access_key=${apiKey}&query=${city},${country}&forecast_days=5`;
+
+        fetch(forecastUrl)
+            .then(response => response.json())
+            .then(data => {
+                const forecastList = document.getElementById('forecast-list');
+                const forecastDetail = document.getElementById('forecast-detail');
+                
+                data.forecast.forEach((forecast, index) => {
+                    const forecastDiv = document.createElement('div');
+                    forecastDiv.innerHTML = `
+                        <p>${forecast.date}</p>
+                        <p>${forecast.day}</p>
+                        <img src="${forecast.day.condition.icon}" alt="Weather Icon">
+                        <p>${forecast.day.avgtemp_c} °C</p>
+                    `;
+                    forecastDiv.addEventListener('click', () => {
+                        forecastDetail.classList.add('active');
+                        forecastDetail.innerHTML = `
+                            <h3>${forecast.day}</h3>
+                            <p>Tarih: ${forecast.date}</p>
+                            <img src="${forecast.day.condition.icon}" alt="Weather Icon">
+                            <p>Ortalama Sıcaklık: ${forecast.day.avgtemp_c} °C</p>
+                            <p>Durum: ${forecast.day.condition.text}</p>
+                            <p>Rüzgar Hızı: ${forecast.day.maxwind_kph} km/s</p>
+                            <p>Yağış: ${forecast.day.totalprecip_mm} mm</p>
+                        `;
+                    });
+                    forecastList.appendChild(forecastDiv);
+                });
+            })
+            .catch(error => console.error('Hata:', error));
+    </script>
+</body>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        #current-weather, #forecast {
+            margin: 20px;
+            padding: 20px;
+            background-color: #bcbcbc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+
+        #current-weather p, #forecast p {
+            margin: 8px 0;
+        }
+
+        #forecast-list {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        #forecast-list div {
+            text-align: center;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        #forecast-list div:hover {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+
+        #weather-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .forecast-detail {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #cecece;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .forecast-detail img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .forecast-detail.active {
+            display: block;
+        }
+    </style>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML, CSS ve JavaScript Bilgileri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        #tabs {
+            width: 200px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            box-sizing: border-box;
+            height: 100%;
+        }
+        #tabs button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ddd;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        #tabs button:hover {
+            background-color: #ccc;
+        }
+        #tabs button.active {
+            background-color: #555;
+            color: white;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+       
+        <div id="tabs">
+            <button class="tab-button" onclick="showTabContent(0)">HTML</button>
+            <button class="tab-button" onclick="showTabContent(1)">CSS</button>
+            <button class="tab-button" onclick="showTabContent(2)">JavaScript</button>
+        </div>
+
+        
+        <div id="content">
+            <div class="tab-content" id="content-0">
+                <h2>HTML Nedir?</h2>
+                <p>HTML (HyperText Markup Language), web sayfalarının yapısını oluşturmak için kullanılan bir işaretleme dilidir. HTML, metin, görseller, bağlantılar, formlar ve diğer içeriklerin düzenlenmesini sağlar. HTML, etiketler (tags) kullanılarak oluşturulur ve tarayıcılar tarafından işlenir.</p>
+                <p>Örnek HTML etiketi: <code>&lt;div&gt;...&lt;/div&gt;</code></p>
+            </div>
+            <div class="tab-content" id="content-1">
+                <h2>CSS Nedir?</h2>
+                <p>CSS (Cascading Style Sheets), web sayfalarının görünümünü ve düzenini belirlemek için kullanılan bir stil dilidir. CSS, HTML elemanlarına stil uygulamak için kullanılır ve renk, yazı tipi, kenar boşlukları, hizalama gibi görsel özellikleri kontrol eder.</p>
+                <p>Örnek CSS kodu:</p>
+                <pre><code>body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}</code></pre>
+            </div>
+            <div class="tab-content" id="content-2">
+                <h2>JavaScript Nedir?</h2>
+                <p>JavaScript, web sayfalarına dinamik içerik eklemek için kullanılan bir programlama dilidir. Kullanıcı etkileşimi, animasyonlar, form doğrulamaları ve daha fazlası JavaScript ile yapılabilir. JavaScript, HTML ve CSS ile birlikte çalışarak etkileşimli ve dinamik web sayfaları oluşturulmasını sağlar.</p>
+                <p>Örnek JavaScript kodu:</p>
+                <pre><code>function greet() {
+    alert('Merhaba Dünya!');
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        function showTabContent(index) {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            contents.forEach(content => content.classList.remove('active'));
+
+          
+            tabs[index].classList.add('active');
+         
+            contents[index].classList.add('active');
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            showTabContent(0);
+        });
+    </script>
+
+</body>
+</html>

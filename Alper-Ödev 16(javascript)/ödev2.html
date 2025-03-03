@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İki Basamaklı Sayıyı Metin Olarak Döndürme</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; text-align: center; padding: 20px; }
+    input { padding: 10px; font-size: 16px; margin-top: 10px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+    .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>İki Basamaklı Sayıyı Metin Olarak Döndür</h1>
+  <p>İki basamaklı bir sayı girin:</p>
+  <input type="number" id="numberInput" placeholder="Sayı girin (10-99)" min="10" max="99">
+  <button onclick="convertNumberToText()">Dönüştür</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function convertNumberToText() {
+      const number = parseInt(document.getElementById("numberInput").value);
+      const birler = ["", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
+      const onlar = ["", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
+
+      if (isNaN(number) || number < 10 || number > 99) {
+        document.getElementById("output").innerHTML = "<p>Lütfen 10 ile 99 arasında bir sayı girin.</p>";
+        return;
+      }
+
+      const onlarBas = Math.floor(number / 10);
+      const birlerBas = number % 10;
+      const result = `${onlar[onlarBas]} ${birler[birlerBas]}`.trim();
+
+      document.getElementById("output").innerHTML = `<p><strong>${number}:</strong> ${result}</p>`;
+    }
+  </script>
+</body>
+</html>

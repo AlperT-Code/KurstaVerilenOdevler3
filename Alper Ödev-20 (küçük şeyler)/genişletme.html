@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgi Bloğu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .accordion {
+            background-color: #f1f1f1;
+            margin: 10px 0;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        .active, .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            font-size: 16px;
+            border-top: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Günlük Hayat Bilgileri</h2>
+
+    <div class="accordion">Kahvaltı Yapmayı Unutmamak</div>
+    <div class="panel">
+        <p>Sabah kahvaltısı, günün en önemli öğünlerinden biridir. Birçok kişi sabah kahvaltı yapmayı atlar, ancak bu enerji kaynağınız olduğu için gün boyunca daha verimli olmanızı sağlar. Kahvaltıda protein, lif ve vitamin açısından zengin besinler tüketmeye özen gösterin.</p>
+    </div>
+
+    <div class="accordion">Egzersizin Önemi</div>
+    <div class="panel">
+        <p>Günlük egzersiz yapmak sadece fiziksel sağlığınızı değil, zihinsel sağlığınızı da iyileştirir. 30 dakika yürüyüş ya da hafif koşu yapmak, stresinizi azaltır ve enerjinizi artırır. Her gün hareket etmek, uzun vadede kalp sağlığınız için de faydalıdır.</p>
+    </div>
+
+    <div class="accordion">Zaman Yönetimi ve Planlama</div>
+    <div class="panel">
+        <p>Başarıya ulaşmanın anahtarı etkili zaman yönetiminden geçer. Günlük plan yaparak, önceliklerinizi belirleyip zamanınızı daha verimli kullanabilirsiniz. İşlerinizin öncelik sırasına göre planlanması, zaman kaybını önler ve hedeflerinize ulaşmanıza yardımcı olur.</p>
+    </div>
+
+    <div class="accordion">Sosyal Medya Kullanımı</div>
+    <div class="panel">
+        <p>Sosyal medya hayatımızın bir parçası haline gelmiş olsa da, fazlası verimliliği düşürebilir ve mental sağlığımızı olumsuz etkileyebilir. Sosyal medyayı kontrollü bir şekilde kullanmak, hayatımızı daha dengeli hale getirebilir. Her gün belirli bir süreyi aşmamak faydalıdır.</p>
+    </div>
+
+    <div class="accordion">Yeterli Uyku Almak</div>
+    <div class="panel">
+        <p>Yeterli uyku almak, hem fiziksel hem de zihinsel sağlığınız için çok önemlidir. Bir yetişkinin her gece 7-9 saat uyuması gerekmektedir. Uykusuzluk, odaklanma problemleri ve uzun vadede daha ciddi sağlık sorunlarına yol açabilir.</p>
+    </div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var panels = document.getElementsByClassName("panel");
+
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+               
+                for (let j = 0; j < panels.length; j++) {
+                    if (panels[j] !== this.nextElementSibling) {
+                        panels[j].style.display = "none";
+                    }
+                }
+
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

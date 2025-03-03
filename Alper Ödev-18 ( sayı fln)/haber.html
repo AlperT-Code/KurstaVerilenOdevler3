@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haber Listesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .news-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .news-item {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .news-item h3 {
+            margin: 0;
+            color: #333;
+        }
+        .news-item p {
+            color: #555;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Apo Haber's</h1>
+
+    <ul class="news-list">
+        <li class="news-item">
+            <div>
+                <h3>Alper İstanbuldan Geri dönebilcekmi??</h3>
+                <p>Alper Taşdemir Adlı Sahıs İstanbul Beylikdüzü Taraflarında kayboldu Uzman Fatih Hoca Hala Aramalara devam ediyor</p>
+            </div>
+            <button class="delete-btn" onclick="deleteNews(this)">Sil</button>
+        </li>
+        <li class="news-item">
+            <div>
+                <h3>Altın fiyatları arttı!!!!</h3>
+                <p>Altın fiyatları alper yüzünden arttıgı dusunuluyo</p>
+            </div>
+            <button class="delete-btn" onclick="deleteNews(this)">Sil</button>
+        </li>
+        <li class="news-item">
+            <div>
+                <h3>Berat Aramaıza katılabilecekmi??</h3>
+                <p>500 kiloluk demir ile sakatlanan berat 1 ay sonra yeniden aramıza geri dönebilecektir bekliyoruz... Geçmiş olsun</p>
+            </div>
+            <button class="delete-btn" onclick="deleteNews(this)">Sil</button>
+        </li>
+    </ul>
+
+    <script>
+        function deleteNews(button) {
+          
+            const newsItem = button.parentElement;
+            newsItem.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
